@@ -21,35 +21,37 @@ const departmentColors: { [key: string]: string } = {
 
 const ContributorsTable: React.FC<ContributorsTableProps> = ({ contributors }) => {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">Top 5 Contributors</h2>
+    <div className="bg-white p-6 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-6 text-gray-700">Top 5 Contributors</h2>
       <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="border-b">
-            <th className="p-2"><div className="flex items-center space-x-1"><FaHashtag /><span>#</span></div></th>
-            <th className="p-2"><div className="flex items-center space-x-1"><FaUser /><span>Full Name</span></div></th>
-            <th className="p-2"><div className="flex items-center space-x-1"><FaDiscord /><span>Discord ID</span></div></th>
-            <th className="p-2"><div className="flex items-center space-x-1"><FaBuilding /><span>Department</span></div></th>
-            <th className="p-2"><div className="flex items-center space-x-1"><FaStar /><span>Score</span></div></th>
-            <th className="p-2"><div className="flex items-center space-x-1"><FaInfoCircle /><span>Details</span></div></th>
+          <tr className="border-b bg-gray-100 text-gray-700">
+            <th className="p-3"><div className="flex items-center space-x-1"><FaHashtag /></div></th>
+            <th className="p-3"><div className="flex items-center space-x-1"><FaUser /><span>Full Name</span></div></th>
+            <th className="p-3"><div className="flex items-center space-x-1"><FaDiscord /><span>Discord ID</span></div></th>
+            <th className="p-3"><div className="flex items-center space-x-1"><FaBuilding /><span>Department</span></div></th>
+            <th className="p-3"><div className="flex items-center space-x-1"><FaStar /><span>Score</span></div></th>
+            <th className="p-3"><div className="flex items-center space-x-1"><FaInfoCircle /><span>Details</span></div></th>
           </tr>
         </thead>
         <tbody>
           {contributors.map((contributor, index) => (
-            <tr key={index} className="border-b">
-              <td className="p-2">{index + 1}</td>
-              <td className="p-2">{contributor.name}</td>
-              <td className="p-2">{contributor.discordId}</td>
-              <td className="p-2">
+            <tr key={index} className="border-b hover:bg-gray-50 transition duration-200">
+              <td className="p-3 text-gray-700">{index + 1}</td>
+              <td className="p-3 text-gray-700 font-medium">{contributor.name}</td>
+              <td className="p-3 text-gray-600">{contributor.discordId}</td>
+              <td className="p-3">
                 {contributor.department.map((dept, i) => (
-                  <span key={i} className={`px-2 py-1 rounded text-xs mr-1 ${departmentColors[dept] || 'bg-gray-200'}`}>
+                  <span key={i} className={`px-3 py-1 rounded-lg text-xs font-semibold mr-1 ${departmentColors[dept] || 'bg-gray-200'}`}>
                     {dept}
                   </span>
                 ))}
               </td>
-              <td className="p-2">{contributor.score}</td>
-              <td className="p-2">
-                <FaArrowRight className="text-gray-600" />
+              <td className="p-3 text-gray-700 font-semibold">{contributor.score}</td>
+              <td className="p-3">
+                <button className="bg-yellow-300 text-white p-2 rounded-lg hover:bg-yellow-400 hover:scale-105 transition-transform duration-200">
+                  <FaArrowRight />
+                </button>
               </td>
             </tr>
           ))}
