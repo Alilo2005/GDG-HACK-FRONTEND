@@ -40,10 +40,16 @@ export default function Login() {
     <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-screen p-6">
       {/* Left Section */}
       <div className="w-full xl:w-1/2 flex flex-col items-center justify-center text-center space-y-8 p-8">
-        <h1 className="text-4xl md:text-5xl font-bold pb-72">
-          <p className="text-green-500">Welcome to </p>
-          <p className="text-blue-500"><span className="text-green-400 ">G</span>Skill!</p>
-        </h1>
+      <div className="text-4xl md:text-5xl font-bold pb-72">
+        <p className="text-gdg_green">Welcome to </p>
+        <h3 className="text-4xl font-bold">
+          <span className="text-gdg_blue">G</span>
+          <span className="text-gdg_green">Ski</span>
+          <span className="text-gdg_red">ll</span>
+          <span className="text-gdg_yellow">.</span>
+        </h3>
+        {/* <p className="text-blue-500"><span className="text-green-400 ">G</span>Skill!</p> */}
+      </div>
         <img src="/gdg.svg" alt="gdg logo" className="w-15 h-6" />
       </div>
 
@@ -81,7 +87,7 @@ export default function Login() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-3 mt-6 font-bold text-white bg-blue-500 hover:bg-blue-600 hover:scale-105 transition-all duration-300 rounded-lg shadow-lg"
+            className="w-full py-3 mt-6 font-bold text-white bg-gdg_blue hover:bg-blue-600 hover:scale-105 transition-all duration-300 rounded-lg shadow-lg"
           >
             Continue
           </button>
