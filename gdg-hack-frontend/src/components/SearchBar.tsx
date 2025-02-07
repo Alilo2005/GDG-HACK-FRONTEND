@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
 import type { SelectProps } from 'antd';
-import axios from '../lib/axios';
+// import axios from '../lib/axios';
 
 import debounce from 'lodash/debounce';
 import { useRouter } from 'next/navigation';
@@ -21,11 +21,12 @@ interface SearchBarProps {
 
 const fetchSearchResults = async (search: string): Promise<SearchOption[]> => {
   try {
-    const response = await axios.get(`/api/machines?machine_name=${search}`);
-    return response.data.data.map((machine: any) => ({
-      value: machine.id.toString(),
-      label: machine.machine_name
-    }));
+    // const response = await axios.get(`/api/machines?machine_name=${search}`);
+    // return response.data.data.map((machine: any) => ({
+    //   value: machine.id.toString(),
+    //   label: machine.machine_name
+    // }));
+    return []; // Temporary return statement to avoid compile error
   } catch (error) {
     console.error('Error fetching search results:', error);
     return [];
@@ -50,7 +51,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ placeholder, style, width = 200 }
 
   const handleChange = (newValue: string) => {
     setValue(newValue);
-    router.push(`/machine-monitoring/${newValue}`);
+    router.push(`/members/${newValue}`);
   };
 
   return (
