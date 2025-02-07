@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHashtag, FaUser, FaDiscord, FaBuilding, FaStar, FaInfoCircle } from 'react-icons/fa';
+import { FaHashtag, FaUser, FaDiscord, FaBuilding, FaStar, FaInfoCircle, FaArrowRight } from 'react-icons/fa';
 
 interface Contributor {
   name: string;
@@ -49,7 +49,7 @@ const ContributorsTable: React.FC<ContributorsTableProps> = ({ contributors }) =
               </td>
               <td className="p-2">{contributor.score}</td>
               <td className="p-2">
-                <span className="w-4 h-4 bg-yellow-300 rounded inline-block"></span>
+                <FaArrowRight className="text-gray-600" />
               </td>
             </tr>
           ))}
