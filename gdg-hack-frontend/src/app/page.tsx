@@ -1,9 +1,14 @@
-import { AppSidebar } from "./components/AppSidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+"use client"; // Now this is a client component
+
+import { useState } from "react";
+import { Sidebar } from "./components/Sidebar";
+
 export default function Home() {
-  return (
-    <SidebarProvider>
-      <AppSidebar />
-    </SidebarProvider>
-  );
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  return <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />;
 }

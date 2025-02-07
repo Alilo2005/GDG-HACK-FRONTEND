@@ -19,7 +19,7 @@ export interface StatCardProps {
   color: string
 }
 
-interface ChartCardProps {
+export interface ChartCardProps {
   title: string;
   data: Array<{
     name: string;
