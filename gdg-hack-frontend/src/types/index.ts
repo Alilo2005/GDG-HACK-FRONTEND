@@ -19,15 +19,16 @@ export interface StatCardProps {
   color: string
 }
 
-export interface ChartCardProps {
+
+interface ChartCardProps {
   title: string;
   data: Array<{
     name: string;
-    value: number;  // Ensure all data points include status
+    value: number;
+    status: number;
   }>;
   dataKey: string;
   color: string;
-  chartType?: string; // Optional, if needed
 }
 
 export interface SidebarItem {
@@ -41,6 +42,7 @@ export interface BarChartCardProps {
   dataKey: string;
   color: string; // Pass color dynamically
 }
+
 export interface FilterCardProps {
   onFilterChange: (filters: FilterState) => void
 }
@@ -49,6 +51,7 @@ export interface FilterState {
   type: string
   status: string
 }
+
 export interface TableHeader {
     key: string;
     label: string;
