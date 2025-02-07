@@ -1,9 +1,9 @@
-import { ChartArea} from "./components/ChartArea";
-
-
-
+import { AppSidebar } from "./components/AppSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 export default function Home() {
   return (
-    <ChartArea />
+    <SidebarProvider>
+      <AppSidebar />
+    </SidebarProvider>
   );
 }
