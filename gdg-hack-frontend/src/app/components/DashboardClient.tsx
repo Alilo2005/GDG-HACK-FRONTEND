@@ -6,6 +6,7 @@ import BarChartComponent from './BarChartComponent';
 import PieChartComponent from './PieChartComponent';
 import ContributorsTable from '../components/ContributorsTable';
 import { BarChart3, Users, CheckCircle, TrendingUp } from 'lucide-react';
+import { GraphArea } from './GraphArea';
 
 const statData = [
   { title: 'Active Members', value: '7,265', icon: <Users />, bgColor: 'bg-blue-500' },
@@ -45,7 +46,7 @@ export default function Dashboard() {
           <StatCard key={index} {...stat} />
         ))}
       </div>
-
+      <GraphArea />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
         <BarChartComponent title="Skills Filed" data={skillsData} />
         <PieChartComponent title="Technologies Used" data={technologiesData} />
