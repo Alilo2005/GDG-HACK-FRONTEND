@@ -16,11 +16,11 @@ const statData = [
 ];
 
 const skillsData = [
-  { name: 'Backend', value: 200 },
-  { name: 'Frontend', value: 300 },
-  { name: 'Security', value: 400 },
-  { name: 'Design', value: 250 },
-  { name: 'Other', value: 150 }
+  { name: 'Backend', value: 200, fill: '#4F46E5' },
+  { name: 'Frontend', value: 300, fill: '#22C55E' },
+  { name: 'Security', value: 400 ,  fill: '#F59E0B' },
+  { name: 'Design', value: 250 ,  fill: '#EC4899' },
+  { name: 'Other', value: 150,   }
 ];
 
 const technologiesData = [
