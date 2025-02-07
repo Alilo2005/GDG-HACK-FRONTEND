@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 interface BarChartProps {
   title: string;
@@ -37,9 +37,6 @@ const BarChartComponent: React.FC<BarChartProps> = ({ title, data }) => {
             }}
             cursor={{ fill: "rgba(0,0,0,0.1)" }}
           />
-
-          {/* Legend for better clarity */}
-          <Legend verticalAlign="top" height={30} iconType="circle" />
 
           {/* Define the Gradient for the Bars */}
           <defs>
