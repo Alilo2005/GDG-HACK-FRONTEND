@@ -19,6 +19,7 @@ export interface StatCardProps {
   color: string
 }
 
+
 interface ChartCardProps {
   title: string;
   data: Array<{
@@ -51,3 +52,54 @@ export interface FilterState {
   status: string
 }
 
+export interface TableHeader {
+    key: string;
+    label: string;
+}
+export interface MembersData {
+  id: string;
+  full_name: string;
+  discord_id: string;
+  skills?: string[];
+  score? : number;
+  departement :string[];
+  rows: {
+    question: string;
+    mentee: string;
+    department: string;
+    createdAt: string;
+    closedAt: string;
+  }[];
+}
+
+export interface MemberTableProps {
+  data: MembersData[];
+}
+
+export interface MemberTableProps {
+  data: MembersData[]
+}
+
+
+export interface ManagersData {
+  id: string;
+  full_name: string;
+  discord_id: string;
+  email: string;
+  departement :string[];
+}
+
+export interface ManagerTableProps {
+  data: ManagersData[];
+}
+
+export interface ManagerTableProps {
+  data: ManagersData[]
+}
+
+export interface ProfileSectionProps {
+  fullName: string;
+  gender: string;
+  email: string;
+  role: string;
+}

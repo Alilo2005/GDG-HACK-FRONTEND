@@ -1,9 +1,15 @@
-import { AppSidebar } from "./components/AppSidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+
+// export default function Home() {
+//   return (
+//     <>
+    
+//     </>
+//   );
+// }
+
+
+import GSkillPage from "../components/homepage";
+
 export default function Home() {
-  return (
-    <SidebarProvider>
-      <AppSidebar />
-    </SidebarProvider>
-  );
+  return <GSkillPage />;
 }
