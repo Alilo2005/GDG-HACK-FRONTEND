@@ -3,7 +3,7 @@ import { LucideProps } from 'lucide-react'
 export interface DashboardProps {
   user: {
     name: string
-    role: 'manager' | 'operator'
+    role: 'manager'
   }
 }
 
@@ -17,7 +17,10 @@ export interface StatCardProps {
   value: string
   icon: React.FC<LucideProps>
   color: string
+  statType: "alerts" | "completed" | "production" | "efficiency"
 }
+
+
 
 export interface ChartCardProps {
   title: string;
