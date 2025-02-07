@@ -39,8 +39,8 @@ export default function Login() {
   return (
     <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-screen p-6">
       {/* Left Section */}
-      <div className="w-full xl:w-1/2 flex flex-col items-center justify-center text-center space-y-8 p-8">
-      <div className="text-4xl md:text-5xl font-bold pb-72">
+      <div className="w-full xl:w-1/2 flex flex-col items-center justify-center text-center">
+      <div className="text-4xl md:text-5xl font-bold">
         <p className="text-gdg_green">Welcome to </p>
         <h3 className="text-4xl font-bold">
           <span className="text-gdg_blue">G</span>
@@ -50,7 +50,6 @@ export default function Login() {
         </h3>
         {/* <p className="text-blue-500"><span className="text-green-400 ">G</span>Skill!</p> */}
       </div>
-        <img src="/gdg.svg" alt="gdg logo" className="w-15 h-6" />
       </div>
 
       {/* Right Section */}
@@ -95,8 +94,7 @@ export default function Login() {
 
         {/* Support Info */}
         <div className="mt-6 text-center">
-          <p className="text-gray-500">Or</p>
-          <p className="text-lg text-gray-500">Support@company.dz</p>
+        <img src="/gdg.svg" alt="gdg logo" className="w-15 h-6 mt-7" />
         </div>
       </div>
     </div>
