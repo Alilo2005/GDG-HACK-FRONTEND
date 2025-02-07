@@ -39,7 +39,15 @@ const PieChartComponent: React.FC<PieChartProps> = ({ title, data }) => {
               <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip
+  contentStyle={{
+    backgroundColor: "rgba(70,70,70,0.75)", // Dark background
+    color: "#9CA3AF", // Gray text
+    borderRadius: "6px",
+  }}
+  cursor={{ stroke: "#6B7280", strokeWidth: 1 }}
+/>
+
           <Legend layout="vertical" align="right" verticalAlign="middle" />
         </PieChart>
       </ResponsiveContainer>
