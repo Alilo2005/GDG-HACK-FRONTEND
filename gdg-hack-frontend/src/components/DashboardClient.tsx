@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import StatCard from '../components/StatCard';
+import StatCard from './StatCard';
 import BarChartComponent from './BarChartComponent';
 import PieChartComponent from './PieChartComponent';
-import ContributorsTable from '../components/ContributorsTable';
+import ContributorsTable from './ContributorsTable';
 import { BarChart3, Users, CheckCircle, TrendingUp } from 'lucide-react';
 import { GraphArea } from './GraphArea';
 
