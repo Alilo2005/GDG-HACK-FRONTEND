@@ -31,11 +31,36 @@ const technologiesData = [
 ];
 
 const contributors = [
-  { name: 'John Doe', department: ['Dev', 'Design'], score: 150 },
-  { name: 'John Doe', department: ['Design'], score: 75 },
-  { name: 'John Doe', department: ['Logistics'], score: 60 },
-  { name: 'John Doe', department: ['Design', 'Communication'], score: 45 },
-  { name: 'John Doe', department: ['Logistics'], score: 30 }
+  {
+    name: "Alice Johnson",
+    discordId: "alice#1234",
+    department: ["dev", "design"],
+    score: 95,
+  },
+  {
+    name: "Bob Smith",
+    discordId: "bob#5678",
+    department: ["logistics"],
+    score: 88,
+  },
+  {
+    name: "Charlie Brown",
+    discordId: "charlie#9101",
+    department: ["communication", "dev"],
+    score: 92,
+  },
+  {
+    name: "Diana Prince",
+    discordId: "diana#1121",
+    department: ["design"],
+    score: 85,
+  },
+  {
+    name: "Eve Adams",
+    discordId: "eve#3141",
+    department: ["logistics", "communication"],
+    score: 90,
+  },
 ];
 
 export default function Dashboard() {
