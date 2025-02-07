@@ -1,8 +1,9 @@
 import Image from "next/image";
-import SearchBar from "./components/SearchBar";
+import Table from "./components/Table";
+
 
 export default function Home() {
   return (
-    <SearchBar placeholder="Search.." />
+    <Table data={[]} />
   );
 }
