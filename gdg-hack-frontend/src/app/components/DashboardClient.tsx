@@ -71,13 +71,16 @@ export default function Dashboard() {
           <StatCard key={index} {...stat} />
         ))}
       </div>
-      <GraphArea />
+      <div className="mb-6">
+        <GraphArea />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
         <BarChartComponent title="Skills Filed" data={skillsData} />
         <PieChartComponent title="Technologies Used" data={technologiesData} />
       </div>
-
-      <ContributorsTable contributors={contributors} />
+      <div className="mb-6">
+        <ContributorsTable contributors={contributors} />
+      </div>
     </div>
   );
 }
