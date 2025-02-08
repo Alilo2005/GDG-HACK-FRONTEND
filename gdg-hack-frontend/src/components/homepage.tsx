@@ -32,6 +32,13 @@ const GSkillPage: React.FC = () => {
         </p>
         </div>
         
+        <div>
+          <button>
+            <a href="/login" className="bg-gdg_blue text-white p-2 rounded-lg hover:scale-105 transition-transform duration-200" />
+              Get Started 
+          </button>
+        </div>
+        
       </div>
 
       {/* Footer */}

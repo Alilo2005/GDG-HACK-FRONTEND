@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { MembersData, MemberTableProps } from '../types/index';
 // import Image from 'next/image';
 import { FaHashtag, FaUser, FaDiscord, FaBuilding, FaStar, FaInfoCircle, FaArrowRight } from 'react-icons/fa';
+// import router from 'next/router';
 // import api from "@/lib/axios";
 
 const MemberTable: React.FC<MemberTableProps> = ({ data: initialData }) => {
@@ -12,59 +13,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data: initialData }) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedDepartement, setSelectedDepartement] = useState<string>("");
-
-//   const [isEditModalOpen, setEditModalOpen] = useState(false);
-//   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-//   const [selectedmember, setSelectedmember] = useState<MembersData | null>(null);
-
-//   const handleEdit = (member: MembersData) => {
-//     setSelectedmember(member);
-//     setEditModalOpen(true);
-//   };
-
-//   const handleDelete = (member: MembersData) => {
-//     setSelectedmember(member);
-//     setDeleteModalOpen(true);
-//   };
-
-//   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-//     if (!selectedmember) return;
-
-//     const formData = new FormData(e.currentTarget);
-//     const formatDate = (date: string) => {
-//       const d = new Date(date);
-//       const pad = (n: number) => (n < 10 ? '0' + n : n);
-//       const hours = d.getHours();
-//       const minutes = d.getMinutes();
-//       const seconds = d.getSeconds();
-//       const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-//       return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${formattedTime}`;
-//     };
-//     const updatedmember = {
-//       energy_consumed: parseFloat(formData.get('energy_consumed') as string),
-//       start_shift_time: formatDate(formData.get('start_shift_time') as string),
-//       end_shift_time: formatDate(formData.get('end_shift_time') as string),
-//     };
-
-//     try {
-//       const response = await api.put(`/api/energy-usage/${selectedmember.id}`, updatedmember);
-//       if (response.status === 200) {
-//         const updatedData = data.map(member =>
-//           member.id === selectedmember.id ? { ...member, ...updatedmember } : member
-//         );
-//         setData(updatedData);
-//         setEditModalOpen(false);
-//         setSelectedmember(null);
-//       }
-//     } catch (error) {
-//       console.error('Error updating energy usage:', error);
-//     }
-//   };
-
-
-
-const listeDep = [
+  const listeDep = [
     "Developement","Visual","Marketing","Finance","HR","Management"
 ];
 
@@ -191,8 +140,12 @@ const filterDepartement = (dep: string) => {
             {member.score}
           </td>
           <td className="px-4 py-2">
-            <button className="bg-gdg_blue text-white p-1 rounded-lg hover:scale-105 transition-transform duration-200">
+            <button 
+            className="bg-gdg_blue text-white p-1 rounded-lg hover:scale-105 transition-transform duration-200">
+              <a href={`/members/${member.id}`}>
               <FaArrowRight />
+              </a>
+              
             </button>
           </td>
         </tr>

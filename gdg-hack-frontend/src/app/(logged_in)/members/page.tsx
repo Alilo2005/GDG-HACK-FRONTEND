@@ -26,3 +26,4 @@ export default function Members() {
 
     return <MemberTable data={memberMockData} />;
 }
+

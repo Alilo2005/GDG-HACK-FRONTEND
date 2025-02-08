@@ -1,46 +1,49 @@
 "use client";
 import { FormEvent, useState } from "react";
+import Image from 'next/image';
 import { useRouter } from "next/navigation";
-import axios from "axios"; // Ensure axios is installed
-
+import api from "@/lib/axios"; // Ensure axios is installed
+// import axios from "axios";
+// 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [loginError, setLoginError] = useState("");
+  // const [passwordError, setPasswordError] = useState("");
+  // const [loginError, setLoginError] = useState("");
   const router = useRouter();
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: FormEvent) => {
+  //   e.preventDefault();
 
-    if (password.length < 8) {
-      setPasswordError("Password must be at least 8 characters");
-      return;
-    }
-    setPasswordError("");
-
-    try {
-      const response = await axios.post(
-        "https://347c-41-111-189-195.ngrok-free.app/api/manager/login", // ✅ Replace with latest ngrok URL
-        { email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "true", // ✅ Bypass ngrok blocks
-          },
-          withCredentials: true, // ✅ Needed if backend uses cookies/sessions
-        }
-      );
-
-      const { token, role } = response.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-      router.push("/dashboard"); // ✅ Redirect to dashboard after login
-    } catch (error) {
-      console.error("Login error:", error);
-      setLoginError("Invalid email or password. Please try again.");
-    }
-  };
+  //   // Validate password length
+  //   // if (password.length < 8) {
+  //   //   setPasswordError("Password must be at least 8 characters");
+  //   //   return;
+  //   // }
+  //   setPasswordError("");
+    
+  //   try {
+  //     // Send login request to the API
+  //     console.log("email",email);
+  //     // const email = "ad"
+  //     const response = await api.post("/api/manager/login", {
+  //       "email":"admin@test.com",
+  //       "password":"password",
+  //     },
+      
+      
+  //   );
+  //     const { token } = response.data;
+  //     const { user } = response.data;
+  //     localStorage.setItem("token", token);
+  //     localStorage.setItem("user",user.id);
+  //     router.push("/dashboard");
+  //   } catch (error) {
+  //     console.error("Login error:", error);
+  //     setLoginError("Invalid email or password. Please try again.");
+  //   }
+  // };
 
   return (
     <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-screen p-6">
@@ -63,7 +66,7 @@ export default function Login() {
           Please fill out the form below to continue
         </p>
 
-        <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col">
+        <form  className="w-full max-w-md flex flex-col">
           {/* Email Input */}
           <input
             type="email"
@@ -85,22 +88,28 @@ export default function Login() {
           />
 
           {/* Error Messages */}
-          {passwordError && <p className="text-red-500 text-sm text-center">{passwordError}</p>}
-          {loginError && <p className="text-red-500 text-sm text-center">{loginError}</p>}
+          {/* {passwordError && <p className="text-red-500 text-sm text-center">{passwordError}</p>}
+          {loginError && <p className="text-red-500 text-sm text-center">{loginError}</p>} */}
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-3 mt-6 font-bold text-white bg-gdg_blue hover:bg-blue-600 hover:scale-105 transition-all duration-300 rounded-lg shadow-lg"
+            className="w-full py-3 my-6 font-bold text-white bg-gdg_blue hover:bg-blue-600 hover:scale-105 transition-all duration-300 rounded-lg shadow-lg"
           >
             Continue
+            
           </button>
         </form>
 
-        {/* Support Info */}
-        <div className="mt-6 text-center">
-          <img src="/gdg.svg" alt="gdg logo" className="w-15 h-6 mt-7" />
+        <div className=" mb-0 flex justify-center">
+        <Image src="/gdg.svg" alt="gdg logo" 
+          width={180}
+          height={10}
+          />
         </div>
+        {/* Support Info */}
+          
+           
       </div>
     </div>
   );
