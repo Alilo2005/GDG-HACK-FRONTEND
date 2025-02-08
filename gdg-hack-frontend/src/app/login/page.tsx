@@ -21,7 +21,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://f26a-41-111-189-195.ngrok-free.app/api/manager/login", // ✅ Replace with latest ngrok URL
+        "https://347c-41-111-189-195.ngrok-free.app/api/manager/login", // ✅ Replace with latest ngrok URL
         { email, password },
         {
           headers: {
