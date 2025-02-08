@@ -1,100 +1,107 @@
 "use client";
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios"; // Ensure axios is installed
 
-import { useState } from "react";
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const router = useRouter();
 
-export default function LoginPage() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Credential handling logic
+    if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters");
+      return;
+    }
+    setPasswordError("");
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+      const response = await axios.post(
+        "https://347c-41-111-189-195.ngrok-free.app/api/manager/login", // ✅ Replace with latest ngrok URL
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "true", // ✅ Bypass ngrok blocks
+          },
+          withCredentials: true, // ✅ Needed if backend uses cookies/sessions
+        }
+      );
+
+      const { token, role } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
+      router.push("/dashboard"); // ✅ Redirect to dashboard after login
+    } catch (error) {
+      console.error("Login error:", error);
+      setLoginError("Invalid email or password. Please try again.");
+    }
   };
 
   return (
-    <section className="bg-white min-h-screen flex items-center justify-center px-6">
-      <div className="w-full max-w-md p-8 bg-white border border-gray-200 shadow-xl rounded-lg transition-all duration-700 ease-out transform">
-        {/* Heading */}
-        <h1 className="text-center hover:scale-110 text-3xl font-extrabold text-gray-800 transition-all duration-500">
-          Welcome Back 👋
-        </h1>
+    <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-screen p-6">
+      {/* Left Section */}
+      <div className="w-full xl:w-1/2 flex flex-col items-center justify-center text-center">
+        <div className="text-4xl md:text-5xl font-bold">
+          <p className="text-gdg_green">Welcome to </p>
+          <h3 className="text-4xl font-bold">
+            <span className="text-gdg_blue">G</span>
+            <span className="text-gdg_green">Ski</span>
+            <span className="text-gdg_red">ll</span>
+            <span className="text-gdg_yellow">.</span>
+          </h3>
+        </div>
+      </div>
 
-        {/* Subtitle */}
-        <p className="text-center text-gray-500 mt-2">
-          Enter your credentials to access your account
+      {/* Right Section */}
+      <div className="w-full xl:w-1/2 bg-white flex flex-col justify-center items-center px-6 py-10 md:px-12 md:py-16 rounded-lg shadow-lg">
+        <p className="text-lg text-gray-600 text-center mb-6">
+          Please fill out the form below to continue
         </p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col">
           {/* Email Input */}
-          <div className="relative flex items-center mt-6">
-            <span className="absolute left-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-            </span>
-            <input
-              type="email"
-              className="w-full py-3 pl-12 pr-4 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300 transition-all duration-300"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            className="w-full px-5 py-3 mb-4 border border-gray-300 rounded-lg shadow-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
 
           {/* Password Input */}
-          <div className="relative flex items-center mt-4">
-            <span className="absolute left-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
-            </span>
-            <input
-              type="password"
-              className="w-full py-3 pl-12 pr-4 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300 transition-all duration-300"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your Password"
+            className="w-full px-5 py-3 mb-2 border border-gray-300 rounded-lg shadow-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
 
-          {/* Sign In Button */}
-          <div className="mt-6">
-            <button
-              type="submit"
-              className="w-full py-3 text-white font-bold bg-blue-500 rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
-            >
-              Sign in
-            </button>
-          </div>
+          {/* Error Messages */}
+          {passwordError && <p className="text-red-500 text-sm text-center">{passwordError}</p>}
+          {loginError && <p className="text-red-500 text-sm text-center">{loginError}</p>}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full py-3 mt-6 font-bold text-white bg-gdg_blue hover:bg-blue-600 hover:scale-105 transition-all duration-300 rounded-lg shadow-lg"
+          >
+            Continue
+          </button>
         </form>
+
+        {/* Support Info */}
+        <div className="mt-6 text-center">
+          <img src="/gdg.svg" alt="gdg logo" className="w-15 h-6 mt-7" />
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
