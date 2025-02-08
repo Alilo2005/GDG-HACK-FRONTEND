@@ -1,8 +1,6 @@
-"use client"; // Now this is a client component
-
-
-import LoginPage from "./login/page";
+import GSkillPage from "../components/homepage";
 
 export default function Home() {
-  <LoginPage />
+  return <GSkillPage />;
+
 }
