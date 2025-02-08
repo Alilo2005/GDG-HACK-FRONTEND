@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiLock, FiInfo, FiLogOut, FiTrash2 } from 'react-icons/fi';
+import { FiLock, FiLogOut,  } from 'react-icons/fi';
 // import api from '@/lib/axios';
 
 export const SettingsMenu: React.FC = () => {
@@ -11,6 +11,7 @@ export const SettingsMenu: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   // Retrieve user_id from local storage
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const userId = localStorage.getItem('user');
 
   const handleLogout = async () => {

@@ -2,9 +2,9 @@ import { MembersData } from "@/types";
 
 export const memberMockData: MembersData[] = [
     {
-        id: '001', full_name: "John Dou 001", discord_id: "001", departement: ["Dev", "Design"], skills: ["dep1", "dep2"], score: 14,
-        rows: [{ question: 'What is React?', mentee: 'John Doe', department: 'design', createdAt: '11-02-2025 02:30:00', closedAt: '11-02-2025 03:00:00' },
-            { question: 'What is React?', mentee: 'John Doe', department: 'design', createdAt: '11-02-2025 02:30:00', closedAt: '11-02-2025 03:00:00' },
+        id: '001', full_name: "John Dou 001", discord_id: "001", departement: ["Visual", "Developement"], skills: ["dep1", "dep2"], score: 14,
+        rows: [{ question: 'What is React?', mentee: 'John Doe', department: 'Developement', createdAt: '11-02-2025 02:30:00', closedAt: '11-02-2025 03:00:00' },
+            { question: 'What is React?', mentee: 'John Doe', department: 'Logistics', createdAt: '11-02-2025 02:30:00', closedAt: '11-02-2025 03:00:00' },
             { question: 'What is React?', mentee: 'John Doe', department: 'design', createdAt: '11-02-2025 02:30:00', closedAt: '11-02-2025 03:00:00' },
             { question: 'What is React?', mentee: 'John Doe', department: 'design', createdAt: '11-02-2025 02:30:00', closedAt: '11-02-2025 03:00:00' },
             { question: 'What is React?', mentee: 'John Doe', department: 'design', createdAt: '11-02-2025 02:30:00', closedAt: '11-02-2025 03:00:00' },
@@ -12,11 +12,11 @@ export const memberMockData: MembersData[] = [
         ]
     },
     {
-        id: '002', full_name: "John Dou 002", discord_id: "001", departement: ["Dev", "dep2"], skills: ["dep1", "dep2"], score: 14,
+        id: '002', full_name: "John Dou 002", discord_id: "001", departement: ["Visaul"], skills: ["dep1", "dep2"], score: 14,
         rows: []
     },
     {
-        id: '003', full_name: "John Dou 003", discord_id: "001", departement: ["dep1", "dep2"], skills: ["dep1", "dep2"], score: 14,
+        id: '003', full_name: "John Dou 003", discord_id: "001", departement: ["Logistics"], skills: ["dep1", "dep2"], score: 14,
         rows: []
     },
     {
