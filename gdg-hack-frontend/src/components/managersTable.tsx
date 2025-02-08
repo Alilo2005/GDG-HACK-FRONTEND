@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaEdit, FaTrash, FaPlus,  } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaPlus, FaBuilding, FaDiscord, FaUser,  } from 'react-icons/fa';
 import { ManagersData, ManagerTableProps } from '../types/index';
 
 const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
@@ -13,6 +13,7 @@ const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
     full_name: '',
     discord_id: '',
     email: '',
+    password: '',
     departement: [],
   });
 
@@ -33,7 +34,7 @@ const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
     const newManagerWithId = { ...newManager, id: Date.now().toString() }; // Convert to string
     setFilteredData([...filteredData, newManagerWithId]);
     setIsAddModalOpen(false);
-    setNewManager({ id: '0', full_name: '', discord_id: '', email: '', departement: [] }); // Reset form
+    setNewManager({ id: '0', full_name: '', discord_id: '', email: '', departement: [] , password :'' }); // Reset form
   };
 
 
@@ -47,6 +48,7 @@ const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
     setNewManager({ ...newManager, departement: value.split(',') });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getStatusColor = (dep: ManagersData['departement']) => {
     if (dep.includes('Dev')) {
       return 'text-purple-600 text-sm rounded';
@@ -86,55 +88,105 @@ const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
         </div>
 
         {/* Table */}
-        <table className="w-full">
-          <thead className="bg-gray-200 text-left">
-            <tr>
-              <th className="px-4 py-2">#</th>
-              <th className="px-4 py-2">Full Name</th>
-              <th className="px-4 py-2">Discord Id</th>
-              <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">Departement</th>
-              <th className="px-4 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {filteredData.map((manager, index) => (
-              <tr key={manager.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
-                <td className="px-4 py-2">{index + 1}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {manager.full_name}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {manager.discord_id}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {manager.email}
-                </td>
-                <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${getStatusColor(manager.departement)}`}>
-                  {manager.departement?.join(', ') || 'N/A'}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex space-x-2">
-                  <button
-                    type="button"
-                    className="text-blue-500 flex items-center transition duration-150 ease-in-out"
-                    aria-label="Edit"
-                    onClick={() => handleEdit(manager)}
-                  >
-                    <FaEdit className="mr-1" />
-                  </button>
-                  <button
-                    type="button"
-                    className="text-red-500 hover:text-red-900 flex items-center transition duration-150 ease-in-out"
-                    aria-label="Delete"
-                    onClick={() => handleDelete(manager)}
-                  >
-                    <FaTrash className="mr-1" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <table className="w-full bg-white rounded-2xl shadow-md border-collapse">
+  <thead className="bg-gray-200 text-left">
+    <tr>
+      <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+        #
+      </th>
+      <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+        <div className="flex items-center space-x-1">
+          <FaUser />
+          <span>Full Name</span>
+        </div>
+      </th>
+      <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+        <div className="flex items-center space-x-1">
+          <FaDiscord />
+          <span>Discord ID</span>
+        </div>
+      </th>
+      <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+        <div className="flex items-center space-x-1">
+          <span>Email</span>
+        </div>
+      </th>
+      <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+        <div className="flex items-center space-x-1">
+          <FaBuilding />
+          <span>Department</span>
+        </div>
+      </th>
+      <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+        Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredData.map((manager, index) => (
+      <tr
+        key={manager.id}
+        className={`hover:bg-gray-100 transition duration-200 ${
+          index % 2 === 0 ? "bg-white" : "bg-gray-50"
+        }`}
+      >
+        <td className="px-4 py-2 text-sm text-gray-900 font-medium">
+          {index + 1}
+        </td>
+        <td className="px-4 py-2 text-sm text-gray-900 font-medium">
+          {manager.full_name}
+        </td>
+        <td className="px-4 py-2 text-sm text-gray-500">
+          {manager.discord_id}
+        </td>
+        <td className="px-4 py-2 text-sm text-gray-500">
+          {manager.email}
+        </td>
+        <td className="px-4 py-2">
+          {manager.departement.map((dept, i) => (
+            <span
+              key={i}
+              className={`px-2 py-1 text-sm rounded-lg font-semibold mr-1 ${
+                dept === "Development"
+                  ? "bg-green-100 text-green-800"
+                  : dept === "Visual"
+                  ? "bg-purple-100 text-purple-800"
+                  : dept === "Communication"
+                  ? "bg-yellow-100 text-yellow-800"
+                  : dept === "Logistics"
+                  ? "bg-orange-100 text-orange-800"
+                  : dept === "ER"
+                  ? "bg-emerald-100 text-emerald-800"
+                  : "bg-gray-100 text-gray-800"
+              }`}
+            >
+              {dept}
+            </span>
+          ))}
+        </td>
+        <td className="px-4 py-2 text-sm font-medium flex space-x-2">
+          <button
+            type="button"
+            className="text-blue-500 flex items-center transition duration-150 ease-in-out"
+            aria-label="Edit"
+            onClick={() => handleEdit(manager)}
+          >
+            <FaEdit className="mr-1" />
+          </button>
+          <button
+            type="button"
+            className="text-red-500 hover:text-red-900 flex items-center transition duration-150 ease-in-out"
+            aria-label="Delete"
+            onClick={() => handleDelete(manager)}
+          >
+            <FaTrash className="mr-1" />
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
       </div>
 
       {/* Add Manager Modal */}
@@ -176,6 +228,17 @@ const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
                   type="email"
                   name="email"
                   value={newManager.email}
+                  onChange={handleInputChange}
+                  className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={newManager.password}
                   onChange={handleInputChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md p-2"
                   required

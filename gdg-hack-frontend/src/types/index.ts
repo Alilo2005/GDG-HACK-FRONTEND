@@ -78,6 +78,7 @@ export interface ManagersData {
   full_name: string;
   discord_id: string;
   email: string;
+  password?: string;
   departement :string[];
 }
 
