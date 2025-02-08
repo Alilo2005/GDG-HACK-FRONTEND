@@ -1,5 +1,6 @@
+import Image from "next/image";
 import React from "react";
-import Image from 'next/image';
+
 
 const GSkillPage: React.FC = () => {
   return (
@@ -34,13 +35,14 @@ const GSkillPage: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <footer>
+
+      <footer className="absolute bottom-4 flex items-center space-x-2">
         <Image
           src="/gdg.svg"
           alt="GDG Algiers Logo"
-          width={128}
-          height={32}
-          className="w-32 h-8"
+          // className="w-32 h-8"
+          height={20}
+          width={180}
         />
       </footer>
     </div>

@@ -2,8 +2,9 @@
 import ManagerTable from "../../../components/managersTable";
 import { managerMockData } from "../../../mockData/manager";
 import { useState, useEffect } from "react";
-import SettingsContent from "../../../components/managers/settingsContent";
-export default function   Manager() {
+
+export default function Manager() {
+
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -15,7 +16,7 @@ export default function   Manager() {
             }, 1000); // Simulated delay
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
-            setError("Failed to load    manager");
+            setError("Failed to load manager");
             setIsLoading(false);
         }
     }, []);
@@ -24,10 +25,8 @@ export default function   Manager() {
     if (error) return <div>Error: {error}</div>;
 
     return  (
-<>
-<SettingsContent/>
+    <>
      <ManagerTable data={managerMockData} />
-     
     </>
     );
     
