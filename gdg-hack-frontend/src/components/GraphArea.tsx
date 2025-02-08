@@ -15,7 +15,7 @@ const data = [
 
 export const GraphArea = () => (
   <div className="bg-background p-4 rounded-2xl shadow-md">
-    <h2 className="text-lg font-bold mb-2 text-text_black">Total Members | Contributions</h2>
+    <h2 className="text-lg font-bold mb-2 text-text_black">Contributions</h2>
     <ResponsiveContainer width="100%" height={250}>
       <LineChart data={data}>
         {/* Subtle Grid for Structure */}
