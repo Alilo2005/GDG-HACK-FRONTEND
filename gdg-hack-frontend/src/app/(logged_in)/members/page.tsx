@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 import MemberTable from "../../../components/membersTable";
 import { memberMockData } from "../../../mockData/member";

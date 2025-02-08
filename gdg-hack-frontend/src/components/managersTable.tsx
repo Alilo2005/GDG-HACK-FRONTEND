@@ -273,20 +273,30 @@
 // export default managerTable;
 
 import React, { useState, useEffect } from 'react';
-import { FaEdit, FaTrash, FaPlus, FaPlug } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaPlus,  } from 'react-icons/fa';
 import { ManagersData, ManagerTableProps } from '../types/index';
 
 const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
-  const [data, setData] = useState(initialData);
+  // const [data, setData] = useState(initialData);
   const [filteredData, setFilteredData] = useState<ManagersData[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedManager, setSelectedManager] = useState<ManagersData | null>(null);
   const [newManager, setNewManager] = useState<ManagersData>({
-    id: 0,
+    id: "0023",
     full_name: '',
     discord_id: '',
     email: '',
     departement: [],
   });
+
+
+ 
+
+// function setSelectedManagers(manager: ManagersData) {
+//   setSelectedManager(manager);
+// }
+
 
   useEffect(() => {
     setFilteredData(initialData);
@@ -294,11 +304,12 @@ const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
 
   const handleAddManager = () => {
     // Generate a unique ID for the new manager
-    const newManagerWithId = { ...newManager, id: Date.now() };
+    const newManagerWithId = { ...newManager, id: Date.now().toString() }; // Convert to string
     setFilteredData([...filteredData, newManagerWithId]);
     setIsAddModalOpen(false);
-    setNewManager({ id: 0, full_name: '', discord_id: '', email: '', departement: [] }); // Reset form
+    setNewManager({ id: '0', full_name: '', discord_id: '', email: '', departement: [] }); // Reset form
   };
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -320,6 +331,17 @@ const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
     } else {
       return 'text-gray-600 text-sm rounded';
     }
+  };
+
+  const handleEdit = (manager: ManagersData) => {
+    setSelectedManager(manager);
+    setIsAddModalOpen(true);
+  };
+
+
+  const handleDelete = (manager: ManagersData) => {
+    const updatedData = filteredData.filter(item => item.id !== manager.id);
+    setFilteredData(updatedData);
   };
 
   return (
@@ -468,3 +490,4 @@ const ManagerTable: React.FC<ManagerTableProps> = ({ data: initialData }) => {
 };
 
 export default ManagerTable;
+

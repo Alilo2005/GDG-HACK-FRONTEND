@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react'
 import { Sidebar } from '../../components/sideBar/sidebar'
-import { Bell, Search } from 'lucide-react'
-import Image from 'next/image'
+import { Bell } from 'lucide-react'
+// import Image from 'next/image'
 import { useDelayedTitle } from '../../hooks/useDelayedTitle'
 import  SearchBar  from '../../components/SearchBar'
 interface LayoutProps {

@@ -20,16 +20,7 @@ export interface StatCardProps {
 }
 
 
-interface ChartCardProps {
-  title: string;
-  data: Array<{
-    name: string;
-    value: number;
-    status: number;
-  }>;
-  dataKey: string;
-  color: string;
-}
+
 
 export interface SidebarItem {
   name: string
@@ -38,6 +29,7 @@ export interface SidebarItem {
 
 export interface BarChartCardProps {
   title: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any[];
   dataKey: string;
   color: string; // Pass color dynamically
