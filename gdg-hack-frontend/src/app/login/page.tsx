@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import api from "../../lib/axios"; // Ensure correct import
+import axios from "axios"; // Direct axios import
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -12,44 +12,52 @@ export default function Login() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+  
     if (password.length < 8) {
       setPasswordError("Password must be at least 8 characters");
       return;
     }
     setPasswordError("");
-
+  
     try {
-      const response = await api.post(
-        "/api/auth/login",
+      const response = await axios.post(
+        "https://f26a-41-111-189-195.ngrok-free.app/api/manager/login/",
         { email, password },
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: { 
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "true" // ✅ Bypass ngrok security issues
+          },
+          withCredentials: true, // ✅ Needed if using cookies/sessions
+        }
       );
-
-      const { token, user } = response.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", user.id);
+      
+  
+      // Store the token in localStorage
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("role", response.data.role);
+  
+      // Redirect to dashboard
       router.push("/dashboard");
     } catch (error) {
       console.error("Login error:", error);
       setLoginError("Invalid email or password. Please try again.");
     }
   };
-
+  
   return (
     <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-screen p-6">
       {/* Left Section */}
       <div className="w-full xl:w-1/2 flex flex-col items-center justify-center text-center">
-      <div className="text-4xl md:text-5xl font-bold">
-        <p className="text-gdg_green">Welcome to </p>
-        <h3 className="text-4xl font-bold">
-          <span className="text-gdg_blue">G</span>
-          <span className="text-gdg_green">Ski</span>
-          <span className="text-gdg_red">ll</span>
-          <span className="text-gdg_yellow">.</span>
-        </h3>
-        {/* <p className="text-blue-500"><span className="text-green-400 ">G</span>Skill!</p> */}
-      </div>
+        <div className="text-4xl md:text-5xl font-bold">
+          <p className="text-gdg_green">Welcome to </p>
+          <h3 className="text-4xl font-bold">
+            <span className="text-gdg_blue">G</span>
+            <span className="text-gdg_green">Ski</span>
+            <span className="text-gdg_red">ll</span>
+            <span className="text-gdg_yellow">.</span>
+          </h3>
+        </div>
       </div>
 
       {/* Right Section */}
@@ -94,7 +102,7 @@ export default function Login() {
 
         {/* Support Info */}
         <div className="mt-6 text-center">
-        <img src="/gdg.svg" alt="gdg logo" className="w-15 h-6 mt-7" />
+          <img src="/gdg.svg" alt="gdg logo" className="w-15 h-6 mt-7" />
         </div>
       </div>
     </div>
