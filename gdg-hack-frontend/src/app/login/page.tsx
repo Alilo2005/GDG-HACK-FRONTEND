@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios"; // Direct axios import
+import axios from "axios"; // Ensure axios is installed
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -12,39 +12,36 @@ export default function Login() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-  
+
     if (password.length < 8) {
       setPasswordError("Password must be at least 8 characters");
       return;
     }
     setPasswordError("");
-  
+
     try {
       const response = await axios.post(
-        "https://f26a-41-111-189-195.ngrok-free.app/api/manager/login/",
+        "https://f26a-41-111-189-195.ngrok-free.app/api/manager/login", // ✅ Replace with latest ngrok URL
         { email, password },
         {
-          headers: { 
+          headers: {
             "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "true" // ✅ Bypass ngrok security issues
+            "ngrok-skip-browser-warning": "true", // ✅ Bypass ngrok blocks
           },
-          withCredentials: true, // ✅ Needed if using cookies/sessions
+          withCredentials: true, // ✅ Needed if backend uses cookies/sessions
         }
       );
-      
-  
-      // Store the token in localStorage
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("role", response.data.role);
-  
-      // Redirect to dashboard
-      router.push("/dashboard");
+
+      const { token, role } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
+      router.push("/dashboard"); // ✅ Redirect to dashboard after login
     } catch (error) {
       console.error("Login error:", error);
       setLoginError("Invalid email or password. Please try again.");
     }
   };
-  
+
   return (
     <div className="flex flex-col xl:flex-row items-center justify-center w-full min-h-screen p-6">
       {/* Left Section */}
