@@ -1,13 +1,16 @@
+"use client"
 import React, { useState } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+// import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { MembersData, MemberTableProps } from '../types/index';
-import { FaEdit, FaTrash } from 'react-icons/fa';
-import manager from '../app/(logged_in)/managers/page';
+// import Image from 'next/image';
+import { FaHashtag, FaUser, FaDiscord, FaBuilding, FaStar, FaInfoCircle, FaArrowRight } from 'react-icons/fa';
 // import api from "@/lib/axios";
 
 const MemberTable: React.FC<MemberTableProps> = ({ data: initialData }) => {
   const [data, setData] = useState(initialData);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedDepartement, setSelectedDepartement] = useState<string>("");
 
 //   const [isEditModalOpen, setEditModalOpen] = useState(false);
@@ -60,28 +63,12 @@ const MemberTable: React.FC<MemberTableProps> = ({ data: initialData }) => {
 //   };
 
 
-const DetailsIcon = () => (
-    <img
-      alt='details-icon'
-      src="/gdg.svg"
-      height={20}
-      width={20}
-    />
-  );
-
 
 const listeDep = [
-    "Dev","Design","Marketing","Finance","HR","Management"
+    "Developement","Visual","Marketing","Finance","HR","Management"
 ];
 
 const filterDepartement = (dep: string) => {
-    // if (dep === "") {
-    //     setData(initialData);
-    // } else {
-    //     const filteredData = initialData.filter((member) => member.departement.includes(dep));
-    //     setData(filteredData);
-    // }
-
     setSelectedDepartement(dep);
     if (dep === "") {
         setData(initialData);
@@ -92,69 +79,128 @@ const filterDepartement = (dep: string) => {
 }
 
 
-// const filterMemberData = data.filter((member) => {
-//     if (selectedDepartement === "") {
-//         return true;
-//     } else {
-//         return member.departement.includes(selectedDepartement);
-//     }
-// });
-
   return (
     <>
-    <div>
-        <button className=''>Filter By </button>
-        <select className='' onChange={(e) => filterDepartement(e.target.value)}>
-          <option value="">All</option>
-          {listeDep.map((dep) => (
-            <option key={dep} value={dep}>{dep}</option>
-          ))}
-        </select>
+    <div className='flex items-center justify-between p-4 '>
+
+<div className="flex items-center gap-4">
+  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+    Filter By
+  </button>
+  <select
+    className="border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    onChange={(e) => filterDepartement(e.target.value)}
+  >
+    <option value="">All</option>
+    {listeDep.map((dep) => (
+      <option key={dep} value={dep}>
+        {dep}
+      </option>
+    ))}
+  </select>
+</div>
+
     </div>
-      <div className="bg-white rounded-lg shadow-md flex-grow overflow-auto custom-scrollbar">
-        <table className="w-full">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Discord Id</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dep</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Skills</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {data.map((member, index) => (
-              <tr key={member.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {member.full_name}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {member.discord_id}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {member.departement.join(", ") || "N/A"} </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {member.skills?.join(", ") || "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {member.score} 
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium items-center  justify-center" >
-                  <a
-                    type="button"
-                    className="text-indigo-600 hover:text-indigo-900 flex items-center transition duration-150 ease-in-out"
-                    aria-label="Details"
-                    href={`/members/${member.id}`}
-                  >
-                    <DetailsIcon />
-                  </a>
-                </td>
-              </tr>
+    <div className="overflow-x-auto">
+  <table className="w-full bg-white rounded-2xl shadow-md border-collapse">
+    <thead className="bg-gray-200 text-left">
+      <tr>
+        <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <div className="flex items-center space-x-1">
+            <FaHashtag />
+          </div>
+        </th>
+        <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <div className="flex items-center space-x-1">
+            <FaUser />
+            <span>Full Name</span>
+          </div>
+        </th>
+        <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <div className="flex items-center space-x-1">
+            <FaDiscord />
+            <span>Discord ID</span>
+          </div>
+        </th>
+        <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <div className="flex items-center space-x-1">
+            <FaBuilding />
+            <span>Department</span>
+          </div>
+        </th>
+        <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <div className="flex items-center space-x-1">
+            <FaStar />
+            <span>Skills</span>
+          </div>
+        </th>
+        <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <div className="flex items-center space-x-1">
+            <FaInfoCircle />
+            <span>Score</span>
+          </div>
+        </th>
+        <th className="px-4 py-2 text-sm font-medium text-gray-600 uppercase tracking-wider">
+          Details
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {data.map((member, index) => (
+        <tr
+          key={member.id}
+          className={`hover:bg-gray-100 transition duration-200 ${
+            index % 2 === 0 ? "bg-white" : "bg-gray-50"
+          }`}
+        >
+          <td className="px-4 py-2 text-sm text-gray-900 font-medium">
+            {index + 1}
+          </td>
+          <td className="px-4 py-2 text-sm text-gray-900 font-medium">
+            {member.full_name}
+          </td>
+          <td className="px-4 py-2 text-sm text-gray-500">
+            {member.discord_id}
+          </td>
+          <td className="px-4 py-2">
+            {member.departement.map((dept, i) => (
+              <span
+                key={i}
+                className={`px-2 py-1 text-sm rounded-lg font-semibold mr-1 ${
+                  dept === "Development"
+                    ? "bg-green-100 text-green-800"
+                    : dept === "Visual"
+                    ? "bg-purple-100 text-purple-800"
+                    : dept === "Communication"
+                    ? "bg-yellow-100 text-yellow-800"
+                    : dept === "Logistics"
+                    ? "bg-orange-100 text-orange-800"
+                    : dept === "ER"
+                    ? "bg-emerald-100 text-emerald-800"
+                    : "bg-gray-100 text-gray-800"
+                }`}
+              >
+                {dept}
+              </span>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </td>
+          <td className="px-4 py-2 text-sm text-gray-500">
+            {member.skills?.join(", ") || "N/A"}
+          </td>
+          <td className="px-4 py-2 text-sm text-gray-700 font-semibold">
+            {member.score}
+          </td>
+          <td className="px-4 py-2">
+            <button className="bg-gdg_blue text-white p-1 rounded-lg hover:scale-105 transition-transform duration-200">
+              <FaArrowRight />
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
     </>
   );
 };

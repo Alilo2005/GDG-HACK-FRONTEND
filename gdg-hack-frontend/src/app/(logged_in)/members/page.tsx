@@ -13,6 +13,7 @@ export default function Members() {
             setTimeout(() => {
                 setIsLoading(false);
             }, 1000); // Simulated delay
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             setError("Failed to load members");
             setIsLoading(false);

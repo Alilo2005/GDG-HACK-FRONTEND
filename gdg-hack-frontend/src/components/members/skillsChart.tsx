@@ -51,6 +51,7 @@ interface SkillsChartProps {
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 export const SkillsChart: React.FC<SkillsChartProps> = ({ skills }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const data = skills.map((skill, index) => ({
     name: skill,
     value: 1, // Assuming each skill has equal weight
