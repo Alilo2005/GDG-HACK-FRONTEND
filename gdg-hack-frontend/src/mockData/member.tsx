@@ -20,7 +20,7 @@ export const memberMockData: MembersData[] = [
         rows: []
     },
     {
-        id: '004', full_name: "John Dou 004", discord_id: "001", departement: ["Dev ", "dep2"], skills: ["dep1", "dep2"], score: 14,
+        id: '004', full_name: "John Dou 004", discord_id: "001", departement: ["Developeement  ", "dep2"], skills: ["dep1", "dep2"], score: 14,
         rows: []
     },
     {
